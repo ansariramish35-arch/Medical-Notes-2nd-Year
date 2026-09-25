@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useTransition } from "react";
+import { useEffect, useState } from "react";
 
 export function ProgressToggle({
   entityType,
@@ -11,25 +11,23 @@ export function ProgressToggle({
   entityId: number;
   initialDone: boolean;
 }) {
+  const key = `medmaster-progress-${entityType}-${entityId}`;
   const [done, setDone] = useState(initialDone);
-  const [pending, startTransition] = useTransition();
+
+  useEffect(() => {
+    const saved = window.localStorage.getItem(key);
+    if (saved !== null) setDone(saved === "1");
+  }, [key]);
 
   const toggle = () => {
     const next = !done;
     setDone(next);
-    startTransition(async () => {
-      await fetch("/api/progress", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ entityType, entityId, done: next }),
-      });
-    });
+    window.localStorage.setItem(key, next ? "1" : "0");
   };
 
   return (
     <button
       onClick={toggle}
-      disabled={pending}
       className={`inline-flex items-center gap-2 rounded-md border px-3 py-1.5 text-[12px] font-bold transition-colors ${
         done
           ? "border-teal bg-teal-wash text-teal-deep"

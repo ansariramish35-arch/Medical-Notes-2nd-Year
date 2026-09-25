@@ -13,12 +13,8 @@ const TABS = [
   { id: "mechanism", label: "Mechanisms" },
 ];
 
-export default async function AtlasPage({
-  searchParams,
-}: {
-  searchParams: Promise<{ tab?: string }>;
-}) {
-  const { tab = "diagrams" } = await searchParams;
+export default async function AtlasPage() {
+  const tab = "diagrams";
   const [allFigures, allEntries, allTopics, allSystems] = await Promise.all([
     db.select().from(figures).orderBy(figures.sortOrder),
     db.select().from(atlasEntries),

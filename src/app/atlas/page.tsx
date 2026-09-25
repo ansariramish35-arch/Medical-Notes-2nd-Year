@@ -4,8 +4,6 @@ import { db } from "@/db";
 import { figures, atlasEntries, topics, systems } from "@/db/schema";
 import { TabNav } from "@/components/TabNav";
 
-export const dynamic = "force-dynamic";
-
 const TABS = [
   { id: "diagrams", label: "Master Diagram Atlas" },
   { id: "classification", label: "Classifications" },

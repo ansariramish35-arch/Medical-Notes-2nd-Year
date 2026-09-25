@@ -1,10 +1,15 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  output: "export",
-  basePath: "/Medical-Notes-2nd-Year",
-  trailingSlash: true,
-  images: { unoptimized: true },
+  eslint: {
+    ignoreDuringBuilds: false,
+  },
+  typescript: {
+    ignoreBuildErrors: false,
+  },
+  images: {
+    remotePatterns: [],
+  },
 };
 
 export default nextConfig;

@@ -1,5 +1,4 @@
-import { db } from "@/db";
-import { subjects, papers, systems, topics, questions, figures, atlasEntries, vivaQuestions, revisionDocs } from "@/db/schema";
+import { subjects, papers, systems, topics, questions, figures, atlasEntries, vivaQuestions, revisionDocs } from "@/lib/static-data";
 
 function AuditCard({ n, title, detail, pass }: { n: number; title: string; detail: string; pass: boolean }) {
   return (
@@ -14,19 +13,16 @@ function AuditCard({ n, title, detail, pass }: { n: number; title: string; detai
   );
 }
 
-export default async function CoveragePage() {
-  const [allSubjects, allPapers, allSystems, allTopics, allQuestions, allFigures, allAtlas, allViva, allRevision] =
-    await Promise.all([
-      db.select().from(subjects),
-      db.select().from(papers),
-      db.select().from(systems).orderBy(systems.sortOrder),
-      db.select().from(topics),
-      db.select().from(questions),
-      db.select().from(figures),
-      db.select().from(atlasEntries),
-      db.select().from(vivaQuestions),
-      db.select().from(revisionDocs),
-    ]);
+export default function CoveragePage() {
+  const allSubjects = subjects;
+  const allPapers = papers;
+  const allSystems = systems;
+  const allTopics = topics;
+  const allQuestions = questions;
+  const allFigures = figures;
+  const allAtlas = atlasEntries;
+  const allViva = vivaQuestions;
+  const allRevision = revisionDocs;
 
   const mapped = allQuestions.filter((q) => q.topicId).length;
   const unmapped = allQuestions.length - mapped;

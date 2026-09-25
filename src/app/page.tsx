@@ -1,5 +1,5 @@
 
-import { Link } from "next/link";
+import Link from "next/link";
 import { subjects, papers, systems, topics, questions, figures } from "@/lib/static-data";
 import { EmphasisBadge, TypeBadge } from "@/components/Badges";
 

@@ -2,10 +2,8 @@ import type { Metadata } from "next";
 import { Fraunces, Manrope } from "next/font/google";
 import Link from "next/link";
 import "./globals.css";
-import { db } from "@/db";
-import { systems, papers } from "@/db/schema";
-import { asc } from "drizzle-orm";
 import { Sidebar } from "@/components/Sidebar";
+import { systems, papers } from "@/lib/static-data";
 
 const fraunces = Fraunces({ subsets: ["latin"], variable: "--font-fraunces" });
 const manrope = Manrope({ subsets: ["latin"], variable: "--font-manrope" });
@@ -16,21 +14,7 @@ export const metadata: Metadata = {
     "Complete master-notes platform: question bank, master topics, diagram atlas, revision layers and coverage audit.",
 };
 
-export default async function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  let allSystems: (typeof systems.$inferSelect)[] = [];
-  let allPapers: (typeof papers.$inferSelect)[] = [];
-  try {
-    [allSystems, allPapers] = await Promise.all([
-      db.select().from(systems).orderBy(asc(systems.sortOrder)),
-      db.select().from(papers),
-    ]);
-  } catch {
-    // Database not yet seeded — render navigation without the unit list.
-  }
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   const paperById = new Map(allPapers.map((p) => [p.id, p]));
   const sidebarSystems = allSystems.map((s) => ({
     id: s.id,

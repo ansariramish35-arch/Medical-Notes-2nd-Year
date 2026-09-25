@@ -33,7 +33,7 @@ export default async function AtlasPage() {
     mechanism: allEntries.filter((e) => e.kind === "mechanism").length,
   };
 
-  const entries = allEntries.filter((e) => e.kind === tab);
+  const entries = allEntries;
 
   return (
     <div className="rise space-y-6">

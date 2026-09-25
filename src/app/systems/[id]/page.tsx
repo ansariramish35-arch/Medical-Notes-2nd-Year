@@ -5,7 +5,9 @@ import { db } from "@/db";
 import { systems, papers, topics, questions, progress } from "@/db/schema";
 import { TypeBadge, Stars, EmphasisBadge, FlagChips } from "@/components/Badges";
 
-export const dynamic = "force-dynamic";
+export function generateStaticParams() {
+  return systems.map((item) => ({ id: String(item.id) }));
+}
 
 export default async function SystemPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;

@@ -4,13 +4,8 @@ import { db } from "@/db";
 import { questions, topics, figures, systems, papers } from "@/db/schema";
 import { TypeBadge, Stars } from "@/components/Badges";
 
-export default async function SearchPage({
-  searchParams,
-}: {
-  searchParams: Promise<{ q?: string }>;
-}) {
-  const { q = "" } = await searchParams;
-  const term = q.trim();
+export default async function SearchPage() {
+  const term = "";
 
   type TopicRow = { id: number; title: string; systemId: number; slug: string };
   type QuestionRow = { id: number; text: string; qtype: "laq" | "sn" | "saq"; stars: number; topicId: number | null };

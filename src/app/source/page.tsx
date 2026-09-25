@@ -2,8 +2,6 @@ import { db } from "@/db";
 import { questions, systems, papers, topics } from "@/db/schema";
 import { SourceIndex, type SourceRow } from "@/components/SourceIndex";
 
-export const dynamic = "force-dynamic";
-
 export default async function SourcePage() {
   const [allQuestions, allSystems, allPapers, allTopics] = await Promise.all([
     db.select().from(questions).orderBy(questions.sortOrder),

@@ -7,8 +7,9 @@ import { renderMarkdown, type FigurePayload } from "@/lib/markdown";
 import { EmphasisBadge, TypeBadge, Stars } from "@/components/Badges";
 import { ProgressToggle } from "@/components/ProgressToggle";
 
-export function generateStaticParams() {
-  return topics.map((item) => ({ id: String(item.id) }));
+export async function generateStaticParams() {
+  const rows = await db.select({ id: topics.id }).from(topics);
+  return rows.map((item) => ({ id: String(item.id) }));
 }
 
 export default async function TopicPage({ params }: { params: Promise<{ id: string }> }) {

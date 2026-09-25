@@ -22,32 +22,15 @@ function Stat({ label, value, sub }: { label: string; value: string | number; su
   );
 }
 
-export default async function Home() {
-  const [
-    allSubjects,
-    allPapers,
-    allSystems,
-    allTopics,
-    allQuestions,
-    allFigures,
-    doneTopics,
-    doneQuestions,
-  ] = await Promise.all([
-    db.select().from(subjects),
-    db.select().from(papers).orderBy(papers.sortOrder),
-    db.select().from(systems).orderBy(systems.sortOrder),
-    db.select().from(topics).orderBy(topics.sortOrder),
-    db.select().from(questions),
-    db.select().from(figures),
-    db
-      .select({ n: sql<number>`count(*)::int` })
-      .from(progress)
-      .where(and(eq(progress.entityType, "topic"), eq(progress.done, true))),
-    db
-      .select({ n: sql<number>`count(*)::int` })
-      .from(progress)
-      .where(and(eq(progress.entityType, "question"), eq(progress.done, true))),
-  ]);
+export default function Home() {
+  const allSubjects = subjects;
+  const allPapers = papers;
+  const allSystems = systems;
+  const allTopics = topics;
+  const allQuestions = questions;
+  const allFigures = figures;
+  const doneTopics = [{ n: 0 }];
+  const doneQuestions = [{ n: 0 }];
 
   const laqs = allQuestions.filter((q) => q.qtype === "laq").length;
   const sns = allQuestions.filter((q) => q.qtype === "sn").length;
@@ -64,8 +47,7 @@ export default async function Home() {
   const hotTopics = allTopics
     .filter((t) => emphasisPriority.includes(t.emphasis))
     .sort((a, b) => emphasisPriority.indexOf(a.emphasis) - emphasisPriority.indexOf(b.emphasis));
-  const topicById = new Map(allTopics.map((t) => [t.id, t]));
-  const systemById = new Map(allSystems.map((s) => [s.id, s]));
+    const systemById = new Map(allSystems.map((s) => [s.id, s]));
   const paperById = new Map(allPapers.map((p) => [p.id, p]));
 
   const flagged = {

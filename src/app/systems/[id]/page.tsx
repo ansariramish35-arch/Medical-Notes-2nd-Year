@@ -6,8 +6,9 @@ import { TypeBadge, Stars, EmphasisBadge, FlagChips } from "@/components/Badges"
 export function generateStaticParams(){ return systems.map((s)=>({id:String(s.id)})); }
 export const dynamicParams=false;
 
-export default function SystemPage({params}:{params:{id:string}}){
-  const systemId=Number(params.id);
+export default async function SystemPage({params}:{params:Promise<{id:string}>}){
+  const { id } = await params;
+  const systemId=Number(id);
   if(!Number.isFinite(systemId)) notFound();
   const sys=systems.find((s)=>s.id===systemId);
   if(!sys) notFound();

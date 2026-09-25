@@ -4,12 +4,8 @@ import { revisionDocs, figures } from "@/db/schema";
 import { renderMarkdown, type FigurePayload } from "@/lib/markdown";
 import { TabNav } from "@/components/TabNav";
 
-export default async function RevisionPage({
-  searchParams,
-}: {
-  searchParams: Promise<{ doc?: string }>;
-}) {
-  const { doc = "paper1" } = await searchParams;
+export default async function RevisionPage() {
+  const doc = "paper1";
   const [docs, allFigures] = await Promise.all([
     db.select().from(revisionDocs).orderBy(revisionDocs.sortOrder),
     db.select().from(figures).orderBy(figures.sortOrder),

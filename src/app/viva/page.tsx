@@ -2,8 +2,6 @@ import { db } from "@/db";
 import { vivaQuestions, topics, systems } from "@/db/schema";
 import { Reveal } from "@/components/Reveal";
 
-export const dynamic = "force-dynamic";
-
 export default async function VivaPage() {
   const [vivas, allTopics, allSystems] = await Promise.all([
     db.select().from(vivaQuestions).orderBy(vivaQuestions.id),

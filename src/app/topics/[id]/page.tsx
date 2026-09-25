@@ -7,7 +7,9 @@ import { renderMarkdown, type FigurePayload } from "@/lib/markdown";
 import { EmphasisBadge, TypeBadge, Stars } from "@/components/Badges";
 import { ProgressToggle } from "@/components/ProgressToggle";
 
-export const dynamic = "force-dynamic";
+export function generateStaticParams() {
+  return topics.map((item) => ({ id: String(item.id) }));
+}
 
 export default async function TopicPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;

@@ -8,8 +8,9 @@ import { ProgressToggle } from "@/components/ProgressToggle";
 export function generateStaticParams(){ return topics.map((t)=>({id:String(t.id)})); }
 export const dynamicParams=false;
 
-export default function TopicPage({params}:{params:{id:string}}){
-  const topicId=Number(params.id);
+export default async function TopicPage({params}:{params:Promise<{id:string}>}){
+  const { id } = await params;
+  const topicId=Number(id);
   if(!Number.isFinite(topicId)) notFound();
   const topic=topics.find((t)=>t.id===topicId); if(!topic) notFound();
   const system=systems.find((s)=>s.id===topic.systemId); if(!system) notFound();

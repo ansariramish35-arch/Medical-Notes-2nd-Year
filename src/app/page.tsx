@@ -12,8 +12,6 @@ import {
 } from "@/db/schema";
 import { EmphasisBadge, TypeBadge } from "@/components/Badges";
 
-export const dynamic = "force-dynamic";
-
 function Stat({ label, value, sub }: { label: string; value: string | number; sub?: string }) {
   return (
     <div className="panel px-4 py-3.5">

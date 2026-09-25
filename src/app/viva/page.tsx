@@ -1,13 +1,10 @@
-import { db } from "@/db";
-import { vivaQuestions, topics, systems } from "@/db/schema";
+import { vivaQuestions, topics, systems } from "@/lib/static-data";
 import { Reveal } from "@/components/Reveal";
 
-export default async function VivaPage() {
-  const [vivas, allTopics, allSystems] = await Promise.all([
-    db.select().from(vivaQuestions).orderBy(vivaQuestions.id),
-    db.select().from(topics),
-    db.select().from(systems),
-  ]);
+export default function VivaPage() {
+  const vivas = vivaQuestions;
+  const allTopics = topics;
+  const allSystems = systems;
   const topicById = new Map(allTopics.map((t) => [t.id, t]));
   const systemById = new Map(allSystems.map((s) => [s.id, s]));
 

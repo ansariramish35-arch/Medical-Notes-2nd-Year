@@ -1,8 +1,6 @@
 import { db } from "@/db";
 import { subjects, papers, systems, topics, questions, figures, atlasEntries, vivaQuestions, revisionDocs } from "@/db/schema";
 
-export const dynamic = "force-dynamic";
-
 function AuditCard({ n, title, detail, pass }: { n: number; title: string; detail: string; pass: boolean }) {
   return (
     <div className={`panel p-4 ${pass ? "border-l-4 border-l-teal" : "border-l-4 border-l-crimson"}`}>

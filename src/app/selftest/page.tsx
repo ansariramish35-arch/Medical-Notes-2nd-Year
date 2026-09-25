@@ -4,8 +4,6 @@ import { questions, systems, topics } from "@/db/schema";
 import { TypeBadge, Stars, FlagChips } from "@/components/Badges";
 import { Reveal } from "@/components/Reveal";
 
-export const dynamic = "force-dynamic";
-
 export default async function SelfTestPage({
   searchParams,
 }: {

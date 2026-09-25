@@ -4,8 +4,6 @@ import { revisionDocs, figures } from "@/db/schema";
 import { renderMarkdown, type FigurePayload } from "@/lib/markdown";
 import { TabNav } from "@/components/TabNav";
 
-export const dynamic = "force-dynamic";
-
 export default async function RevisionPage({
   searchParams,
 }: {

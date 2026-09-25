@@ -4,8 +4,6 @@ import { db } from "@/db";
 import { questions, topics, figures, systems, papers } from "@/db/schema";
 import { TypeBadge, Stars } from "@/components/Badges";
 
-export const dynamic = "force-dynamic";
-
 export default async function SearchPage({
   searchParams,
 }: {

@@ -1,15 +1,6 @@
-import Link from "next/link";
-import { eq, sql, and } from "drizzle-orm";
-import { db } from "@/db";
-import {
-  subjects,
-  papers,
-  systems,
-  topics,
-  questions,
-  figures,
-  progress,
-} from "@/db/schema";
+
+import { Link } from "next/link";
+import { subjects, papers, systems, topics, questions, figures } from "@/lib/static-data";
 import { EmphasisBadge, TypeBadge } from "@/components/Badges";
 
 function Stat({ label, value, sub }: { label: string; value: string | number; sub?: string }) {
